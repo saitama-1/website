@@ -281,19 +281,6 @@ function initHeader() {
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll(); // Gọi ngay lúc load
-
-  // ── Sticky header ẩn/hiện khi scroll nhanh (optional) ──
-  let lastY = 0;
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    // Chỉ ẩn header khi scroll xuống và đã qua 200px
-    if (y > 200 && y > lastY + 5) {
-      header?.classList.add('header--hidden');
-    } else if (y < lastY - 5) {
-      header?.classList.remove('header--hidden');
-    }
-    lastY = y;
-  }, { passive: true });
 }
 
 // =====================

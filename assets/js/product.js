@@ -10,38 +10,17 @@
 const GALLERY_IMAGES = [
   {
     label: 'Mặt trước',
-    src:       'https://www.intelligentservers.co.uk/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/c/9/c9200-24t-a.jpg',
-    fallback:  'https://placehold.co/800x600/e8f4ff/005073?text=C9200-24T-A+Front',
-    thumb:     'https://www.intelligentservers.co.uk/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/c/9/c9200-24t-a.jpg',
-    thumbFb:   'https://placehold.co/120x90/e8f4ff/005073?text=Front',
-  },
-  {
-    label: 'Góc nghiêng phải',
-    src:       'https://images.router-switch.com/media/catalog/product/cache/1/image/800x600/9df78eab33525d08d6e5fb8d27136e95/c/9/c9200-24t-2.jpg',
-    fallback:  'https://placehold.co/800x600/ddeeff/003366?text=C9200-24T-A+Angle',
-    thumb:     'https://images.router-switch.com/media/catalog/product/cache/1/thumbnail/200x200/9df78eab33525d08d6e5fb8d27136e95/c/9/c9200-24t-2.jpg',
-    thumbFb:   'https://placehold.co/120x90/ddeeff/003366?text=Angle',
+    src:       'https://cnttshop.vn//storage/images/San-pham/Switch/Cisco/110/CBS110-16T/CBS110-16T-4.jpg',
+    fallback:  'https://placehold.co/800x600/e8f4ff/005073?text=Image+1',
+    thumb:     'https://cnttshop.vn//storage/images/San-pham/Switch/Cisco/110/CBS110-16T/CBS110-16T-4.jpg',
+    thumbFb:   'https://placehold.co/120x90/e8f4ff/005073?text=Image+1',
   },
   {
     label: 'Mặt sau',
-    src:       'https://images.router-switch.com/media/catalog/product/cache/1/image/800x600/9df78eab33525d08d6e5fb8d27136e95/c/9/c9200-24t-back.jpg',
-    fallback:  'https://placehold.co/800x600/cce0ff/002244?text=C9200-24T-A+Back',
-    thumb:     'https://images.router-switch.com/media/catalog/product/cache/1/thumbnail/200x200/9df78eab33525d08d6e5fb8d27136e95/c/9/c9200-24t-back.jpg',
-    thumbFb:   'https://placehold.co/120x90/cce0ff/002244?text=Back',
-  },
-  {
-    label: 'Stacking view',
-    src:       'https://www.cisco.com/c/dam/en/us/products/collateral/switches/catalyst-9200-series-switches/nb-06-cat9200-ser-data-sheet-cte-en-figure-1.jpg',
-    fallback:  'https://placehold.co/800x600/bbddff/001833?text=StackWise-160',
-    thumb:     'https://placehold.co/120x90/bbddff/001833?text=Stack',
-    thumbFb:   'https://placehold.co/120x90/bbddff/001833?text=Stack',
-  },
-  {
-    label: 'Network module SFP',
-    src:       'https://www.cisco.com/c/dam/en/us/products/collateral/switches/catalyst-9200-series-switches/nb-06-cat9200-ser-data-sheet-cte-en-figure-2.jpg',
-    fallback:  'https://placehold.co/800x600/aad4ff/001122?text=SFP+Uplink+Module',
-    thumb:     'https://placehold.co/120x90/aad4ff/001122?text=SFP',
-    thumbFb:   'https://placehold.co/120x90/aad4ff/001122?text=SFP',
+    src:       'https://cnttshop.vn//storage/images/San-pham/Switch/Cisco/110/CBS110-16T/CBS110-16T-5.jpg',
+    fallback:  'https://placehold.co/800x600/ddeeff/003366?text=Image+2',
+    thumb:     'https://cnttshop.vn//storage/images/San-pham/Switch/Cisco/110/CBS110-16T/CBS110-16T-5.jpg',
+    thumbFb:   'https://placehold.co/120x90/ddeeff/003366?text=Image+2',
   },
 ];
 
@@ -190,9 +169,9 @@ function initGallery() {
   }
 
   // Chỉ trigger zoom khi chuột vào đúng ảnh lớn
-  galleryMain.addEventListener('mouseenter', showZoom);
-  galleryMain.addEventListener('mouseleave', hideZoom);
-  galleryMain.addEventListener('mousemove',  moveZoom);
+  // galleryMain.addEventListener('mouseenter', showZoom);
+  // galleryMain.addEventListener('mouseleave', hideZoom);
+  // galleryMain.addEventListener('mousemove',  moveZoom);
 }
 
 // =====================
@@ -515,13 +494,8 @@ function initProductHeader() {
   });
 
   // Shadow khi scroll
-  let lastY = 0;
   window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    header?.classList.toggle('scrolled', y > 60);
-    header?.classList.toggle('header--hidden', y > 200 && y > lastY + 5);
-    if (y < lastY - 5) header?.classList.remove('header--hidden');
-    lastY = y;
+    header?.classList.toggle('scrolled', window.scrollY > 60);
   }, { passive: true });
 
   // Back to top

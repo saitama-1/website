@@ -174,9 +174,7 @@ input, button, select, textarea { font-family: inherit; font-size: inherit; }
 
 /* ===== HEADER ===== */
 .header {
-  position: sticky;
-  top: 0;
-  z-index: 300;
+  position: relative;
   background: #fff;
   border-bottom: 1px solid var(--gray-200);
   box-shadow: var(--sh);
@@ -185,8 +183,6 @@ input, button, select, textarea { font-family: inherit; font-size: inherit; }
   align-items: center;
   transition: box-shadow .3s, transform .3s;
 }
-.header.scrolled { box-shadow: var(--sh-md); }
-.header--hidden  { transform: translateY(-100%); }
 
 .header__inner {
   display: flex;

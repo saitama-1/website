@@ -134,17 +134,17 @@
         <div class="gallery__main-wrap" id="galleryMainWrap">
           <div class="gallery__main" id="galleryMain">
             <img
-              src="https://images.router-switch.com/media/catalog/product/cache/1/image/800x600/9df78eab33525d08d6e5fb8d27136e95/c/9/c9200-24t.jpg"
+              src="https://cnttshop.vn//storage/images/San-pham/Switch/Cisco/110/CBS110-16T/CBS110-16T-4.jpg"
               alt="Cisco Catalyst C9200-24T-A — Mặt trước"
               id="mainImg" draggable="false"
-              onerror="this.src='https://placehold.co/600x480/e8f4ff/005073?text=Cisco+C9200-24T-A'" />
+              onerror="this.src='https.placehold.co/600x480/e8f4ff/005073?text=Cisco+C9200-24T-A'" />
             <div class="zoom-lens" id="zoomLens"></div>
           </div>
           <div class="zoom-preview" id="zoomPreview">
             <img
-              src="https://images.router-switch.com/media/catalog/product/cache/1/image/800x600/9df78eab33525d08d6e5fb8d27136e95/c/9/c9200-24t.jpg"
+              src="https://cnttshop.vn//storage/images/San-pham/Switch/Cisco/110/CBS110-16T/CBS110-16T-4.jpg"
               id="zoomPreviewImg" alt="Zoom preview"
-              onerror="this.src='https://placehold.co/600x480/e8f4ff/005073?text=Zoom'" />
+              onerror="this.src='https.placehold.co/600x480/e8f4ff/005073?text=Zoom'" />
           </div>
         </div>
 
