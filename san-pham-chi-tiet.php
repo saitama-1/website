@@ -1,127 +1,33 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cisco Catalyst C9200-24T-A — CiscoVN Network Solutions</title>
-  <meta name="description" content="Cisco Catalyst C9200-24T-A — 24-port GE Data Switch, Network Advantage, StackWise-160, Switching capacity 128 Gbps." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <link rel="stylesheet" href="assets/css/product.css" />
-</head>
-<body>
+<?php
+require_once 'includes/db.php';
+require_once 'includes/functions.php';
+require_once 'includes/config.php';
 
-<!-- TOP BAR -->
-<div class="topbar">
-  <div class="container topbar__inner">
-    <div class="topbar__left">
-      <a href="tel:0901234567" class="topbar__item">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
-        0901 234 567
-      </a>
-      <a href="/cdn-cgi/l/email-protection#4f262129200f2c263c2c20623921612c2022" class="topbar__item">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        <span class="__cf_email__" data-cfemail="ee87808881ae8d879d8d81c39880c08d8183">[email&#160;protected]</span>
-      </a>
-      <span class="topbar__item topbar__item--hidden-mobile">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        Thứ 2–6: 8h–17h30 &nbsp;|&nbsp; Thứ 7: 8h–12h
-      </span>
-    </div>
-    <a href="lien-he.html" class="topbar__cta">
-      Yêu cầu báo giá
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
-  </div>
-</div>
+// ============================================================
+// LẤY DỮ LIỆU SẢN PHẨM (TODO: query từ CSDL theo $slug)
+// $slug = isset($_GET['slug']) ? lamsach($_GET['slug']) : '';
+// $sanPham = ... query ...
+// ============================================================
 
-<!-- HEADER -->
-<header class="header" id="header">
-  <div class="container header__inner">
-    <a href="index.html" class="logo">
-      <div class="logo__mark">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-      </div>
-      <div class="logo__text">
-        <span class="logo__brand">CiscoVN</span>
-        <span class="logo__tagline">Network Solutions</span>
-      </div>
-    </a>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-    <nav class="nav" id="nav">
-      <ul class="nav__list">
-        <li><a href="index.html" class="nav__link">Trang chủ</a></li>
-        <li><a href="san-pham.html" class="nav__link active">Sản phẩm</a></li>
-        <li class="has-dropdown">
-          <a href="#" class="nav__link nav__link--arrow">Giải pháp
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-          </a>
-          <div class="dropdown">
-            <div class="dropdown__inner">
-              <div class="dropdown__header"><p>Giải pháp theo ngành</p></div>
-              <a href="#" class="dropdown__item">
-                <span class="dropdown__icon">🏢</span>
-                <span class="dropdown__content"><strong>Enterprise Network</strong><small>Hạ tầng mạng doanh nghiệp lớn</small></span>
-                <svg class="dropdown__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-              <a href="#" class="dropdown__item">
-                <span class="dropdown__icon">🏫</span>
-                <span class="dropdown__content"><strong>Campus Network</strong><small>Mạng trường học, tòa nhà văn phòng</small></span>
-                <svg class="dropdown__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-              <a href="#" class="dropdown__item">
-                <span class="dropdown__icon">🔒</span>
-                <span class="dropdown__content"><strong>Network Security</strong><small>Bảo mật hạ tầng & tường lửa NGFW</small></span>
-                <svg class="dropdown__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-              <a href="#" class="dropdown__item">
-                <span class="dropdown__icon">☁️</span>
-                <span class="dropdown__content"><strong>SD-WAN & Cloud</strong><small>Kết nối chi nhánh, hybrid cloud</small></span>
-                <svg class="dropdown__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-              <div class="dropdown__footer">
-                <a href="lien-he.html">Tư vấn giải pháp miễn phí <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li><a href="blog.html" class="nav__link">Blog</a></li>
-        <li><a href="lien-he.html" class="nav__link">Liên hệ</a></li>
-      </ul>
-    </nav>
-    <div class="header__actions">
-      <a href="tel:0901234567" class="header__phone">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
-        0901 234 567
-      </a>
-      <a href="lien-he.html" class="btn btn--primary btn--sm">Báo giá</a>
-    </div>
-  </div>
-</header>
+// Cấu hình header
+$tieuDeTrang = 'Cisco Catalyst C9200-24T-A — CiscoVN Network Solutions';
+$moTaTrang   = 'Cisco Catalyst C9200-24T-A — 24-port GE Data Switch, Network Advantage, StackWise-160';
+$navActive   = 'san-pham';
+$cssExtra    = ['assets/css/product.css'];
+require_once 'includes/header.php';
+?>
 
 <!-- BREADCRUMB -->
-<div class="breadcrumb-bar">
-  <div class="container">
-    <nav class="breadcrumb">
-      <a href="index.html" class="breadcrumb__item">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        Trang chủ
-      </a>
-      <span class="breadcrumb__sep">›</span>
-      <a href="san-pham.html" class="breadcrumb__item">Sản phẩm</a>
-      <span class="breadcrumb__sep">›</span>
-      <a href="san-pham.html?dm=switch" class="breadcrumb__item">Switch</a>
-      <span class="breadcrumb__sep">›</span>
-      <a href="#" class="breadcrumb__item">Catalyst 9200 Series</a>
-      <span class="breadcrumb__sep">›</span>
-      <span class="breadcrumb__item breadcrumb__item--active">C9200-24T-A</span>
-    </nav>
-  </div>
-</div>
+<?php
+// TODO: Điền dữ liệu thực tế từ biến $sanPham vào label và url khi đã kết nối CSDL
+$breadcrumbs = [
+    ['url' => 'danh-sach-san-pham.php', 'label' => 'Sản phẩm'],
+    ['url' => 'danh-sach-san-pham.php?danh_muc=switch', 'label' => 'Switch'],
+    ['url' => '#', 'label' => 'Catalyst 9200 Series'],
+    ['url' => '', 'label' => 'C9200-24T-A']
+];
+require_once 'includes/breadcrumb.php';
+?>
 
 <!-- ========== PRODUCT MAIN ========== -->
 <section class="prod-main">
@@ -224,7 +130,10 @@
 
         <!-- Nút hành động -->
         <div class="prod-info__actions">
-          <button class="btn btn--primary btn--lg btn--contact" id="openContactModal">
+          <button class="btn btn--primary btn--lg btn--contact"
+                  data-modal="lien-he"
+                  data-ma="C9200-24T-A"
+                  data-ten="Cisco Catalyst C9200-24T-A">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
             Liên hệ báo giá
           </button>
@@ -384,7 +293,10 @@
         <div class="sidebar-card sidebar-card--contact">
           <h4>Cần tư vấn thêm?</h4>
           <p>Liên hệ kỹ sư của chúng tôi để được hỗ trợ chọn model phù hợp.</p>
-          <button class="btn btn--white btn--sm" onclick="document.getElementById('openContactModal').click()">
+          <button class="btn btn--white btn--sm"
+                  data-modal="lien-he"
+                  data-ma="C9200-24T-A"
+                  data-ten="Cisco Catalyst C9200-24T-A">
             Chat Zalo ngay
           </button>
           <a href="tel:0901234567" class="btn btn--outline-white btn--sm" style="margin-top:8px">
@@ -546,132 +458,10 @@
   </div>
 </section>
 
-<!-- ========== MODAL LIÊN HỆ ========== -->
-<div class="modal-overlay" id="contactModal">
-  <div class="modal">
-    <button class="modal__close" id="closeModal">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-    <div class="modal__header">
-      <div class="modal__icon">💬</div>
-      <h3>Liên hệ tư vấn & báo giá</h3>
-      <p>Chọn nhân viên để chat Zalo ngay</p>
-    </div>
-    <div class="modal__product">
-      <code>C9200-24T-A</code>
-      <span>Cisco Catalyst C9200-24T-A</span>
-    </div>
-    <div class="zalo-list">
-      <a href="https://zalo.me/0901234567" target="_blank" class="zalo-item">
-        <div class="zalo-item__avatar">NT</div>
-        <div class="zalo-item__info">
-          <strong>Nguyễn Thành</strong>
-          <span>Kỹ sư CCNP · Switch & Router</span>
-          <span class="zalo-item__phone">0901 234 567</span>
-        </div>
-        <div class="zalo-item__action">
-          <svg width="28" height="28" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#0068FF"/><path d="M24 10C16.27 10 10 15.82 10 23c0 4.14 2.07 7.83 5.3 10.3L14 38l5.1-2.6c1.5.42 3.1.65 4.9.65 7.73 0 14-5.82 14-13S31.73 10 24 10z" fill="white"/></svg>
-          Chat Zalo
-        </div>
-      </a>
-      <a href="https://zalo.me/0902345678" target="_blank" class="zalo-item">
-        <div class="zalo-item__avatar">PL</div>
-        <div class="zalo-item__info">
-          <strong>Phạm Linh</strong>
-          <span>Sales · Tư vấn giải pháp</span>
-          <span class="zalo-item__phone">0902 345 678</span>
-        </div>
-        <div class="zalo-item__action">
-          <svg width="28" height="28" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#0068FF"/><path d="M24 10C16.27 10 10 15.82 10 23c0 4.14 2.07 7.83 5.3 10.3L14 38l5.1-2.6c1.5.42 3.1.65 4.9.65 7.73 0 14-5.82 14-13S31.73 10 24 10z" fill="white"/></svg>
-          Chat Zalo
-        </div>
-      </a>
-      <a href="https://zalo.me/0903456789" target="_blank" class="zalo-item">
-        <div class="zalo-item__avatar">TH</div>
-        <div class="zalo-item__info">
-          <strong>Trần Huy</strong>
-          <span>Kỹ sư CCNA · Wireless & Security</span>
-          <span class="zalo-item__phone">0903 456 789</span>
-        </div>
-        <div class="zalo-item__action">
-          <svg width="28" height="28" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#0068FF"/><path d="M24 10C16.27 10 10 15.82 10 23c0 4.14 2.07 7.83 5.3 10.3L14 38l5.1-2.6c1.5.42 3.1.65 4.9.65 7.73 0 14-5.82 14-13S31.73 10 24 10z" fill="white"/></svg>
-          Chat Zalo
-        </div>
-      </a>
-    </div>
-    <div class="modal__or">hoặc gọi hotline</div>
-    <a href="tel:0901234567" class="btn btn--primary" style="width:100%;justify-content:center">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
-      Gọi ngay 0901 234 567
-    </a>
-  </div>
-</div>
 
 <!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer__grid">
-      <div class="footer__brand">
-        <a href="index.html" class="logo logo--light">
-          <div class="logo__mark">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
-          <div class="logo__text">
-            <span class="logo__brand">CiscoVN</span>
-            <span class="logo__tagline">Network Solutions</span>
-          </div>
-        </a>
-        <p class="footer__desc">Nhà phân phối thiết bị mạng Cisco chính hãng tại Việt Nam. Tư vấn, cung cấp và triển khai giải pháp mạng toàn diện cho doanh nghiệp.</p>
-        <div class="footer__contacts">
-          <a href="tel:0901234567">📞 0901 234 567</a>
-          <a href="mailto:info@cisco-vn.com">✉️ info@cisco-vn.com</a>
-          <a href="#">📍 123 Nguyễn Huệ, Q1, TP.HCM</a>
-        </div>
-      </div>
-      <div class="footer__col">
-        <h4>Sản phẩm</h4>
-        <ul>
-          <li><a href="san-pham.html?dm=switch">Switch Cisco</a></li>
-          <li><a href="san-pham.html?dm=router">Router Cisco</a></li>
-          <li><a href="san-pham.html?dm=firewall">Firewall Cisco</a></li>
-          <li><a href="san-pham.html?dm=wireless">Wireless AP</a></li>
-          <li><a href="san-pham.html?dm=module-quang">Module quang SFP</a></li>
-        </ul>
-      </div>
-      <div class="footer__col">
-        <h4>Hỗ trợ</h4>
-        <ul>
-          <li><a href="lien-he.html">Yêu cầu báo giá</a></li>
-          <li><a href="lien-he.html">Tư vấn kỹ thuật</a></li>
-          <li><a href="blog.html">Hướng dẫn cấu hình</a></li>
-          <li><a href="#">Chính sách bảo hành</a></li>
-        </ul>
-      </div>
-      <div class="footer__col">
-        <h4>Giờ làm việc</h4>
-        <ul>
-          <li><span class="footer__muted">T2–T6: 8h – 17h30</span></li>
-          <li><span class="footer__muted">T7: 8h – 12h</span></li>
-          <li><a href="tel:0901234567" class="footer__hotline">📞 Hotline 24/7: 0901 234 567</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer__bottom">
-      <p>© <span id="year"></span> CiscoVN Network Solutions. All rights reserved.</p>
-      <div class="footer__links">
-        <a href="#">Điều khoản</a>
-        <a href="#">Bảo mật</a>
-        <a href="#">Sitemap</a>
-      </div>
-    </div>
-  </div>
-</footer>
 
-<!-- BACK TO TOP -->
-<button class="back-top" id="backTop" title="Lên đầu trang">
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
-</button>
-
-<script src="assets/js/product.js"></script>
-</body>
-</html>
+<?php
+$jsExtra = ['assets/js/product.js'];
+require_once 'includes/footer.php';
+?>

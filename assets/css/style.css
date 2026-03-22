@@ -321,6 +321,32 @@ input, button, select, textarea { font-family: inherit; font-size: inherit; }
 }
 .header__phone:hover { background: var(--blue); color: #fff; }
 
+/* ===== BREADCRUMB ===== */
+.breadcrumb-bar {
+  background: var(--gray-50);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 10px 0;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--gray-600);
+  transition: color .2s;
+}
+.breadcrumb__item:hover { color: var(--blue); }
+.breadcrumb__item--active { color: var(--blue); font-weight: 600; pointer-events: none; }
+.breadcrumb__sep { color: var(--gray-400); font-size: 14px; }
+
 /* ===== HERO ===== */
 .hero {
   position: relative;
@@ -584,7 +610,8 @@ input, button, select, textarea { font-family: inherit; font-size: inherit; }
   overflow: hidden;
   display: flex; align-items: center; justify-content: center;
 }
-.prod-card__img img { width: 100%; height: 100%; object-fit: contain; padding: 24px; transition: transform .35s; }
+.prod-card__img a { display: block; width: 100%; height: 100%; }
+.prod-card__img img { width: 100%; height: 100%; object-fit: cover; padding: 0; transition: transform .35s; }
 .prod-card:hover .prod-card__img img { transform: scale(1.06); }
 
 .prod-card__overlay {
@@ -601,7 +628,8 @@ input, button, select, textarea { font-family: inherit; font-size: inherit; }
   display: flex; flex-direction: column; gap: 5px;
 }
 
-.badge-dm { background: var(--blue); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 50px; }
+.prod-card__badges .badge-dm { background: var(--blue) !important; color: #fff !important; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 50px; }
+.prod-card__badges .badge-hot { background: var(--red) !important; color: #fff !important; font-size: 10.5px; font-weight: 700; padding: 4px 12px; border-radius: 50px; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 3px 8px rgba(220,38,38,.3); }
 
 .prod-card__body { padding: 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
 
@@ -805,7 +833,9 @@ input, button, select, textarea { font-family: inherit; font-size: inherit; }
     transform: scaleX(0);
     transition: transform .2s;
   }
-  .nav__link:hover { background: var(--gray-50); padding-left: 13px; }
+  .nav__link:hover, .nav__link.active { padding-left: 13px; }
+  .nav__link:hover { background: var(--gray-50); }
+  .nav__link.active { background: transparent; }
   .nav__link:hover::after, .nav__link.active::after { transform: scaleX(1); }
 
   /* Dropdown desktop */

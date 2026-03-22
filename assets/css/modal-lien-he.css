@@ -1,0 +1,204 @@
+/* =============================================
+   MODAL LIÊN HỆ — dùng chung toàn site
+   Load trên mọi trang có modal-lien-he.php
+============================================= */
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  backdrop-filter: blur(4px);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px;
+  width: 100%;
+  max-width: 460px;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform .25s;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-overlay.open .modal {
+  transform: translateY(0);
+}
+
+.modal__close {
+  position: absolute;
+  top: 16px; right: 16px;
+  background: var(--gray-100);
+  border: none;
+  border-radius: 50%;
+  width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--gray-600);
+  transition: background .2s, color .2s;
+}
+.modal__close:hover { background: var(--gray-200); color: var(--dark); }
+
+.modal__header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modal__icon { font-size: 36px; margin-bottom: 8px; }
+
+.modal__header h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+
+.modal__header p {
+  font-size: 13px;
+  color: var(--gray-400);
+}
+
+.modal__product {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: var(--gray-600);
+}
+
+.modal__product code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+/* Zalo list */
+.zalo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.zalo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--r-lg);
+  transition: all .2s;
+  color: inherit;
+}
+.zalo-item:hover { border-color: #0068FF; background: #f0f6ff; }
+
+.zalo-item__avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--cyan-dk) 100%);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.zalo-item__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.zalo-item__info strong { font-size: 14px; font-weight: 700; color: var(--dark); }
+.zalo-item__info span:not(.zalo-item__phone) { font-size: 12px; color: var(--gray-400); }
+.zalo-item__phone { font-size: 12px; color: var(--blue); font-weight: 600; }
+
+.zalo-item__action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #0068FF;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+
+.modal__or {
+  text-align: center;
+  font-size: 12px;
+  color: var(--gray-400);
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.modal__or::before, .modal__or::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 35%;
+  height: 1px;
+  background: var(--gray-200);
+}
+.modal__or::before { left: 0; }
+.modal__or::after  { right: 0; }
+
+/* ===== TABLET ===== */
+@media (min-width: 768px) {
+  .prod-main__layout { grid-template-columns: 1fr 1fr; align-items: start; }
+
+  .gallery__thumb { width: 84px; height: 66px; }
+
+  .prod-info__actions { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+  }
+
+  .prod-detail__layout { grid-template-columns: 1fr 300px; }
+
+  .prod-detail__img-grid { grid-template-columns: 1fr 1fr; }
+
+  .feature-cards { grid-template-columns: 1fr 1fr; }
+
+  .reviews-layout { grid-template-columns: 300px 1fr; }
+
+  .form-row { grid-template-columns: 1fr 1fr; }
+
+  
+}
+
+/* ===== DESKTOP ===== */
+@media (min-width: 1024px) {
+  .prod-main__layout { grid-template-columns: 1fr 1fr; gap: 50px; }
+
+  .gallery__main { aspect-ratio: unset; height: 420px; }
+
+  .prod-detail__layout { grid-template-columns: 1fr 320px; gap: 48px; }
+
+  .reviews-layout { grid-template-columns: 320px 1fr; }
+}

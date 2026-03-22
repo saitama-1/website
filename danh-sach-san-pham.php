@@ -179,145 +179,30 @@ function buildUrl(array $override = []): string {
     return '?' . http_build_query(array_filter($params, fn($v) => $v !== ''));
 }
 
+// Cấu hình header
 $tieuDeTrang = ($danhMucHienTai['ten'] ?? 'Sản phẩm') . ' — CiscoVN';
 $moTaTrang   = 'Danh sách ' . ($danhMucHienTai['ten'] ?? '') . ' Cisco chính hãng tại Việt Nam';
+$navActive   = 'san-pham';
+$cssExtra    = ['assets/css/danh-sach-san-pham.css'];
+require_once 'includes/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title><?= $tieuDeTrang ?></title>
-  <meta name="description" content="<?= lamsach($moTaTrang) ?>" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <link rel="stylesheet" href="assets/css/danh-sach-san-pham.css" />
-</head>
-<body>
-
-<!-- ===== TOP BAR ===== -->
-<div class="topbar">
-  <div class="container topbar__inner">
-    <div class="topbar__left">
-      <a href="tel:0901234567" class="topbar__item">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
-        0901 234 567
-      </a>
-      <a href="mailto:info@cisco-vn.com" class="topbar__item">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        info@cisco-vn.com
-      </a>
-      <span class="topbar__item topbar__item--hidden-mobile">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        Thứ 2–6: 8h–17h30 &nbsp;|&nbsp; Thứ 7: 8h–12h
-      </span>
-    </div>
-    <a href="lien-he.php" class="topbar__cta">
-      Yêu cầu báo giá
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
-  </div>
-</div>
-
-<!-- ===== HEADER ===== -->
-<header class="header" id="header">
-  <div class="container header__inner">
-    <a href="index.php" class="logo">
-      <div class="logo__mark">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-      </div>
-      <div class="logo__text">
-        <span class="logo__brand">CiscoVN</span>
-        <span class="logo__tagline">Network Solutions</span>
-      </div>
-    </a>
-
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-
-    <nav class="nav" id="nav">
-      <ul class="nav__list">
-        <li><a href="index.php" class="nav__link">Trang chủ</a></li>
-        <li><a href="danh-sach-san-pham.php" class="nav__link active">Sản phẩm</a></li>
-        <li class="has-dropdown">
-          <a href="#" class="nav__link nav__link--arrow">
-            Giải pháp
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-          </a>
-          <div class="dropdown">
-            <div class="dropdown__inner">
-              <div class="dropdown__header"><p>Giải pháp theo ngành</p></div>
-              <a href="#" class="dropdown__item">
-                <span class="dropdown__icon">🏢</span>
-                <span class="dropdown__content"><strong>Enterprise Network</strong><small>Hạ tầng mạng doanh nghiệp lớn</small></span>
-                <svg class="dropdown__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-              <a href="#" class="dropdown__item">
-                <span class="dropdown__icon">🏫</span>
-                <span class="dropdown__content"><strong>Campus Network</strong><small>Mạng trường học, tòa nhà văn phòng</small></span>
-                <svg class="dropdown__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-              <a href="#" class="dropdown__item">
-                <span class="dropdown__icon">🔒</span>
-                <span class="dropdown__content"><strong>Network Security</strong><small>Bảo mật hạ tầng & tường lửa NGFW</small></span>
-                <svg class="dropdown__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-              <a href="#" class="dropdown__item">
-                <span class="dropdown__icon">☁️</span>
-                <span class="dropdown__content"><strong>SD-WAN & Cloud</strong><small>Kết nối chi nhánh, hybrid cloud</small></span>
-                <svg class="dropdown__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-              <div class="dropdown__footer">
-                <a href="lien-he.php">Tư vấn giải pháp miễn phí <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li><a href="blog.php" class="nav__link">Blog</a></li>
-        <li><a href="lien-he.php" class="nav__link">Liên hệ</a></li>
-      </ul>
-    </nav>
-
-    <div class="header__actions">
-      <a href="tel:0901234567" class="header__phone">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
-        0901 234 567
-      </a>
-      <a href="lien-he.php" class="btn btn--primary btn--sm">Báo giá</a>
-    </div>
-  </div>
-</header>
 
 <!-- ===== BREADCRUMB ===== -->
-<div class="breadcrumb-bar">
-  <div class="container">
-    <nav class="breadcrumb">
-      <a href="index.php" class="breadcrumb__item">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        Trang chủ
-      </a>
-      <span class="breadcrumb__sep">›</span>
-      <a href="danh-sach-san-pham.php" class="breadcrumb__item">Sản phẩm</a>
-      <?php if ($danhMucHienTai): ?>
-      <span class="breadcrumb__sep">›</span>
-      <span class="breadcrumb__item breadcrumb__item--active">
-        <?= lamsach($danhMucHienTai['ten']) ?>
-      </span>
-      <?php endif; ?>
-      <?php if ($seriesSlug && $seriesList): ?>
-        <?php $seriesHienTai = array_filter($seriesList, fn($s) => $s['slug'] === $seriesSlug); ?>
-        <?php if ($seriesHienTai): ?>
-          <?php $s = array_values($seriesHienTai)[0]; ?>
-          <span class="breadcrumb__sep">›</span>
-          <span class="breadcrumb__item breadcrumb__item--active"><?= lamsach($s['ten']) ?></span>
-        <?php endif; ?>
-      <?php endif; ?>
-    </nav>
-  </div>
-</div>
+<?php
+$breadcrumbs = [
+    ['url' => 'danh-sach-san-pham.php', 'label' => 'Sản phẩm']
+];
+if ($danhMucHienTai) {
+    $breadcrumbs[] = ['url' => 'danh-sach-san-pham.php?danh_muc=' . $danhMucHienTai['slug'], 'label' => $danhMucHienTai['ten']];
+}
+if ($seriesSlug && $seriesList) {
+    $seriesHienTai = array_values(array_filter($seriesList, fn($s) => $s['slug'] === $seriesSlug));
+    if ($seriesHienTai) {
+        $breadcrumbs[] = ['url' => '', 'label' => $seriesHienTai[0]['ten']];
+    }
+}
+require_once 'includes/breadcrumb.php';
+?>
 
 <!-- ===== PAGE HEADER ===== -->
 <div class="page-hero">
@@ -552,7 +437,7 @@ $moTaTrang   = 'Danh sách ' . ($danhMucHienTai['ten'] ?? '') . ' Cisco chính h
             <span class="prod-card__code"><?= lamsach($sp['ma_san_pham']) ?></span>
             <p class="prod-card__desc"><?= lamsach($sp['mo_ta_ngan']) ?></p>
             <div class="prod-card__foot">
-              <a href="lien-he.php?sp=<?= urlencode($sp['ma_san_pham']) ?>"
+              <a href="#" data-modal="lien-he" data-sp-ma="<?= lamsach($sp['ma_san_pham']) ?>"
                  class="btn btn--primary btn--sm">
                 Liên hệ báo giá
               </a>
@@ -642,70 +527,9 @@ $moTaTrang   = 'Danh sách ' . ($danhMucHienTai['ten'] ?? '') . ' Cisco chính h
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 <!-- ===== FOOTER ===== -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer__grid">
-      <div class="footer__brand">
-        <a href="index.php" class="logo logo--light">
-          <div class="logo__mark">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
-          <div class="logo__text">
-            <span class="logo__brand">CiscoVN</span>
-            <span class="logo__tagline">Network Solutions</span>
-          </div>
-        </a>
-        <p class="footer__desc">Nhà phân phối thiết bị mạng Cisco chính hãng tại Việt Nam.</p>
-        <div class="footer__contacts">
-          <a href="tel:0901234567">📞 0901 234 567</a>
-          <a href="mailto:info@cisco-vn.com">✉️ info@cisco-vn.com</a>
-          <a href="#">📍 123 Nguyễn Huệ, Q1, TP.HCM</a>
-        </div>
-      </div>
-      <div class="footer__col">
-        <h4>Sản phẩm</h4>
-        <ul>
-          <li><a href="?danh_muc=switch">Switch Cisco</a></li>
-          <li><a href="?danh_muc=router">Router Cisco</a></li>
-          <li><a href="?danh_muc=firewall">Firewall Cisco</a></li>
-          <li><a href="?danh_muc=wireless">Wireless AP</a></li>
-          <li><a href="?danh_muc=module-quang">Module quang SFP</a></li>
-        </ul>
-      </div>
-      <div class="footer__col">
-        <h4>Hỗ trợ</h4>
-        <ul>
-          <li><a href="lien-he.php">Yêu cầu báo giá</a></li>
-          <li><a href="lien-he.php">Tư vấn kỹ thuật</a></li>
-          <li><a href="blog.php">Blog kỹ thuật</a></li>
-          <li><a href="#">Chính sách bảo hành</a></li>
-        </ul>
-      </div>
-      <div class="footer__col">
-        <h4>Giờ làm việc</h4>
-        <ul>
-          <li><span class="footer__muted">T2–T6: 8h – 17h30</span></li>
-          <li><span class="footer__muted">T7: 8h – 12h</span></li>
-          <li><a href="tel:0901234567" class="footer__hotline">📞 Hotline 24/7</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer__bottom">
-      <p>© <span id="year"></span> CiscoVN Network Solutions. All rights reserved.</p>
-      <div class="footer__links">
-        <a href="#">Điều khoản</a>
-        <a href="#">Bảo mật</a>
-        <a href="#">Sitemap</a>
-      </div>
-    </div>
-  </div>
-</footer>
 
-<button class="back-top" id="backTop" title="Lên đầu trang">
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
-</button>
-
-<script src="assets/js/main.js"></script>
-<script src="assets/js/danh-sach-san-pham.js"></script>
-</body>
-</html>
+<?php
+// Cấu hình footer
+$jsExtra = ['assets/js/danh-sach-san-pham.js'];
+require_once 'includes/footer.php';
+?>

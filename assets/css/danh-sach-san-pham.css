@@ -2,32 +2,6 @@
    DANH SÁCH SẢN PHẨM — danh-sach-san-pham.css
 ============================================== */
 
-/* ===== BREADCRUMB ===== */
-.breadcrumb-bar {
-  background: var(--gray-50);
-  border-bottom: 1px solid var(--gray-200);
-  padding: 10px 0;
-}
-
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-.breadcrumb__item {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 13px;
-  color: var(--gray-600);
-  transition: color .2s;
-}
-.breadcrumb__item:hover              { color: var(--blue); }
-.breadcrumb__item--active            { color: var(--blue); font-weight: 600; pointer-events: none; }
-.breadcrumb__sep                     { color: var(--gray-400); font-size: 14px; }
-
 /* ===== PAGE HERO ===== */
 .page-hero {
   background: linear-gradient(135deg, var(--blue) 0%, var(--blue-lt) 100%);
@@ -474,13 +448,13 @@
   overflow: hidden;
 }
 
-.prod-card__img a { display: block; height: 100%; }
+.prod-card__img a { display: block; width: 100%; height: 100%; }
 
 .prod-card__img img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  padding: 20px;
+  object-fit: cover;
+  padding: 0;
   transition: transform .35s;
 }
 .prod-card:hover .prod-card__img img { transform: scale(1.06); }
@@ -701,15 +675,13 @@
 
   /* Sidebar desktop — static, không phải drawer */
   .filter-sidebar {
-    position: sticky;
-    top: 88px;
+    position: static;
     left: auto;
     height: auto;
-    max-height: calc(100vh - 100px);
     width: auto;
     box-shadow: none;
     transition: none;
-    overflow-y: auto;
+    overflow-y: visible;
   }
 
   .filter-sidebar__close { display: none; }
