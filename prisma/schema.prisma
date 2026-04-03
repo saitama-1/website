@@ -1,0 +1,252 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model admins {
+  id            Int           @id @default(autoincrement())
+  ten_dang_nhap String        @unique(map: "ten_dang_nhap") @db.VarChar(50)
+  mat_khau      String        @db.VarChar(255)
+  ho_ten        String?       @db.VarChar(100)
+  email         String?       @db.VarChar(100)
+  quyen         admins_quyen? @default(editor)
+  tao_luc       DateTime      @default(now()) @db.Timestamp(0)
+}
+
+model anh_san_pham {
+  id           Int      @id @default(autoincrement())
+  san_pham_id  Int
+  duong_dan    String   @db.VarChar(255)
+  alt_text     String?  @db.VarChar(200)
+  la_anh_chinh Boolean? @default(false)
+  thu_tu       Int?     @default(0)
+  san_pham     san_pham @relation(fields: [san_pham_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "anh_san_pham_ibfk_1")
+
+  @@index([san_pham_id], map: "san_pham_id")
+}
+
+model bai_viet {
+  id                Int                 @id @default(autoincrement())
+  tieu_de           String              @db.VarChar(255)
+  slug              String              @unique(map: "slug") @db.VarChar(255)
+  tom_tat           String?             @db.VarChar(300)
+  noi_dung          String?             @db.LongText
+  anh_dai_dien      String?             @db.VarChar(255)
+  loai              bai_viet_loai?      @default(blog)
+  tac_gia           String?             @default("Admin") @db.VarChar(100)
+  luot_xem          Int?                @default(0)
+  trang_thai        Boolean?            @default(true)
+  tao_luc           DateTime            @default(now()) @db.Timestamp(0)
+  cap_nhat          DateTime            @default(now()) @db.Timestamp(0)
+  bai_viet_san_pham bai_viet_san_pham[]
+
+  @@index([loai, trang_thai], map: "idx_bv_loai")
+}
+
+model bai_viet_san_pham {
+  bai_viet_id Int
+  san_pham_id Int
+  bai_viet    bai_viet @relation(fields: [bai_viet_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "bai_viet_san_pham_ibfk_1")
+  san_pham    san_pham @relation(fields: [san_pham_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "bai_viet_san_pham_ibfk_2")
+
+  @@id([bai_viet_id, san_pham_id])
+  @@index([san_pham_id], map: "san_pham_id")
+}
+
+model danh_muc {
+  id               Int                @id @default(autoincrement())
+  ten              String             @db.VarChar(100)
+  slug             String             @unique(map: "slug") @db.VarChar(100)
+  mo_ta            String?            @db.Text
+  icon             String?            @db.VarChar(10)
+  thu_tu           Int?               @default(0)
+  hien_thi         Boolean?           @default(true)
+  tao_luc          DateTime           @default(now()) @db.Timestamp(0)
+  cap_nhat         DateTime           @default(now()) @db.Timestamp(0)
+  ho_san_pham      ho_san_pham[]
+  san_pham_noi_bat san_pham_noi_bat[]
+}
+
+model ho_san_pham {
+  id           Int      @id @default(autoincrement())
+  danh_muc_id  Int
+  ten          String   @db.VarChar(200)
+  slug         String   @unique(map: "slug") @db.VarChar(200)
+  mo_ta        String?  @db.Text
+  anh_dai_dien String?  @db.VarChar(255)
+  thu_tu       Int?     @default(0)
+  hien_thi     Boolean? @default(true)
+  tao_luc      DateTime @default(now()) @db.Timestamp(0)
+  cap_nhat     DateTime @default(now()) @db.Timestamp(0)
+  danh_muc     danh_muc @relation(fields: [danh_muc_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "ho_san_pham_ibfk_1")
+  series       series[]
+
+  @@index([danh_muc_id], map: "idx_ho_danhmuc")
+}
+
+model lien_he {
+  id                Int           @id @default(autoincrement())
+  ho_ten            String        @db.VarChar(100)
+  email             String        @db.VarChar(100)
+  so_dien_thoai     String?       @db.VarChar(15)
+  cong_ty           String?       @db.VarChar(200)
+  san_pham_quan_tam String?       @db.VarChar(500)
+  noi_dung          String        @db.Text
+  loai              lien_he_loai? @default(bao_gia)
+  da_xu_ly          Boolean?      @default(false)
+  ghi_chu           String?       @db.Text
+  tao_luc           DateTime      @default(now()) @db.Timestamp(0)
+
+  @@index([da_xu_ly], map: "idx_lienhe_xuly")
+}
+
+model san_pham {
+  id                Int                  @id @default(autoincrement())
+  series_id         Int
+  ten               String               @db.VarChar(200)
+  ma_san_pham       String               @unique(map: "ma_san_pham") @db.VarChar(100)
+  slug              String               @unique(map: "slug") @db.VarChar(200)
+  mo_ta_ngan        String?              @db.VarChar(300)
+  mo_ta             String?              @db.Text
+  anh_chinh         String?              @db.VarChar(255)
+  tinh_trang        san_pham_tinh_trang? @default(lien_he)
+  noi_bat           Boolean?             @default(false)
+  thu_tu            Int?                 @default(0)
+  hien_thi          Boolean?             @default(true)
+  tao_luc           DateTime             @default(now()) @db.Timestamp(0)
+  cap_nhat          DateTime             @default(now()) @db.Timestamp(0)
+  anh_san_pham      anh_san_pham[]
+  bai_viet_san_pham bai_viet_san_pham[]
+  series            series               @relation(fields: [series_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "san_pham_ibfk_1")
+  san_pham_noi_bat  san_pham_noi_bat[]
+  san_pham_tags     san_pham_tags[]
+  tai_lieu          tai_lieu[]
+  thong_so_ky_thuat thong_so_ky_thuat[]
+
+  @@index([hien_thi], map: "idx_sp_hien_thi")
+  @@index([ma_san_pham], map: "idx_sp_ma")
+  @@index([series_id], map: "idx_sp_series")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model san_pham_noi_bat {
+  id          Int      @id @default(autoincrement())
+  danh_muc_id Int
+  san_pham_id Int
+  thu_tu      Int      @default(0)
+  mo_ta_ngan  String?  @db.VarChar(200)
+  hien_thi    Boolean  @default(true)
+  tao_luc     DateTime @default(now()) @db.Timestamp(0)
+  cap_nhat    DateTime @default(now()) @db.Timestamp(0)
+  danh_muc    danh_muc @relation(fields: [danh_muc_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "spnb_fk_danh_muc")
+  san_pham    san_pham @relation(fields: [san_pham_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "spnb_fk_san_pham")
+
+  @@unique([danh_muc_id, san_pham_id], map: "uq_danhmuc_sanpham")
+  @@index([danh_muc_id, hien_thi, thu_tu], map: "idx_danh_muc_hien_thi")
+  @@index([san_pham_id], map: "idx_san_pham_id")
+}
+
+model san_pham_tags {
+  san_pham_id Int
+  tag_id      Int
+  san_pham    san_pham @relation(fields: [san_pham_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "san_pham_tags_ibfk_1")
+  tags        tags     @relation(fields: [tag_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "san_pham_tags_ibfk_2")
+
+  @@id([san_pham_id, tag_id])
+  @@index([tag_id], map: "tag_id")
+}
+
+model series {
+  id             Int         @id @default(autoincrement())
+  ho_san_pham_id Int
+  ten            String      @db.VarChar(200)
+  slug           String      @unique(map: "slug") @db.VarChar(200)
+  mo_ta          String?     @db.Text
+  mo_ta_ngan     String?     @db.VarChar(300)
+  anh_dai_dien   String?     @db.VarChar(255)
+  diem_noi_bat   String?     @db.Text
+  ung_dung       String?     @db.Text
+  thu_tu         Int?        @default(0)
+  hien_thi       Boolean?    @default(true)
+  tao_luc        DateTime    @default(now()) @db.Timestamp(0)
+  cap_nhat       DateTime    @default(now()) @db.Timestamp(0)
+  san_pham       san_pham[]
+  ho_san_pham    ho_san_pham @relation(fields: [ho_san_pham_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "series_ibfk_1")
+  tai_lieu       tai_lieu[]
+
+  @@index([ho_san_pham_id], map: "idx_series_ho")
+}
+
+model tags {
+  id            Int             @id @default(autoincrement())
+  ten           String          @unique(map: "ten") @db.VarChar(100)
+  slug          String          @unique(map: "slug") @db.VarChar(100)
+  san_pham_tags san_pham_tags[]
+}
+
+model tai_lieu {
+  id          Int            @id @default(autoincrement())
+  san_pham_id Int?
+  series_id   Int?
+  loai        tai_lieu_loai? @default(datasheet)
+  ten         String         @db.VarChar(200)
+  duong_dan   String         @db.VarChar(255)
+  kich_thuoc  String?        @db.VarChar(20)
+  tao_luc     DateTime       @default(now()) @db.Timestamp(0)
+  san_pham    san_pham?      @relation(fields: [san_pham_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "tai_lieu_ibfk_1")
+  series      series?        @relation(fields: [series_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "tai_lieu_ibfk_2")
+
+  @@index([san_pham_id], map: "san_pham_id")
+  @@index([series_id], map: "series_id")
+}
+
+model thong_so_ky_thuat {
+  id          Int      @id @default(autoincrement())
+  san_pham_id Int
+  nhom        String   @db.VarChar(100)
+  ten         String   @db.VarChar(200)
+  gia_tri     String   @db.Text
+  don_vi      String?  @db.VarChar(50)
+  thu_tu      Int?     @default(0)
+  san_pham    san_pham @relation(fields: [san_pham_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "thong_so_ky_thuat_ibfk_1")
+
+  @@index([san_pham_id, nhom], map: "idx_tskt_sp")
+}
+
+enum tai_lieu_loai {
+  datasheet
+  quick_start
+  user_guide
+  release_note
+  other
+}
+
+enum admins_quyen {
+  admin
+  editor
+}
+
+enum bai_viet_loai {
+  blog
+  huong_dan
+  tin_tuc
+  case_study
+}
+
+enum lien_he_loai {
+  bao_gia
+  tu_van
+  ho_tro
+  khac
+}
+
+enum san_pham_tinh_trang {
+  co_hang
+  het_hang
+  ngung_san_xuat
+  lien_he
+}
