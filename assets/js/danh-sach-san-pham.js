@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initSidebar();
   initScrollTop();
   setYear();
-  initSearchDebounce();
+  initFormSubmit();
+  initFilterToggle();
 });
 
 // ── Header (hamburger + dropdown + scroll) ──
@@ -106,7 +107,6 @@ function initSidebar() {
     if (e.key === 'Escape') close();
   });
 
-  // Desktop (≥1024px): sidebar luôn hiện, không cần overlay
   const mq = window.matchMedia('(min-width: 1024px)');
   const onResize = (e) => {
     if (e.matches) close();
@@ -114,27 +114,36 @@ function initSidebar() {
   mq.addEventListener('change', onResize);
 }
 
-// ── Search debounce (tự submit sau 500ms gõ) ──
-function initSearchDebounce() {
-  const input = document.querySelector('.filter-search input[name="q"]');
-  if (!input) return;
+// ── Form submit ──
+function initFormSubmit() {
+  const form = document.getElementById('filterForm');
+  if (!form) return;
 
-  let timer = null;
-  input.addEventListener('input', () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      // Submit form tự động
-      const form = document.getElementById('filterForm');
-      if (form) form.submit();
-    }, 600);
+  form.querySelectorAll('input[type="checkbox"]').forEach(el => {
+    el.addEventListener('change', () => {
+      form.submit();
+    });
   });
+}
 
-  // Enter submit ngay
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      clearTimeout(timer);
-      document.getElementById('filterForm')?.submit();
-    }
+// ── Filter Toggle (Collapse/Expand) ──
+function initFilterToggle() {
+  const toggleBtn = document.getElementById('filterToggle');
+  const section   = document.querySelector('.filter-section');
+  const text      = toggleBtn?.querySelector('.collapse-text');
+
+  if (!toggleBtn || !section) return;
+
+  const isCollapsed = localStorage.getItem('filter_collapsed') === 'true';
+  if (isCollapsed) {
+    section.classList.add('is-collapsed');
+    if (text) text.textContent = 'Mở rộng';
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    const collapsed = section.classList.toggle('is-collapsed');
+    if (text) text.textContent = collapsed ? 'Mở rộng' : 'Thu gọn';
+    localStorage.setItem('filter_collapsed', collapsed);
   });
 }
 
