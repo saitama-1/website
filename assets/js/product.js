@@ -284,6 +284,7 @@ function initTabs() {
 function initStarPicker() {
   const stars     = document.querySelectorAll('.star-pick');
   const starLabel = document.getElementById('starLabel');
+  const hiddenInput = document.getElementById('reviewStarInput');
   const labels    = ['', 'Rất tệ', 'Tệ', 'Bình thường', 'Tốt', 'Xuất sắc'];
   let selectedStar = 0;
 
@@ -302,6 +303,7 @@ function initStarPicker() {
 
     star.addEventListener('click', () => {
       selectedStar = val;
+      if (hiddenInput) hiddenInput.value = selectedStar;
       stars.forEach(s => s.classList.toggle('active', +s.dataset.val <= selectedStar));
       if (starLabel) starLabel.textContent = labels[selectedStar];
     });
@@ -331,7 +333,7 @@ function initStarPicker() {
     const newReview = {
       id: Date.now(),
       ten, cong_ty: cty,
-      sao: selectedStar,
+      sao: selectedStar || +hiddenInput?.value || 0,
       noi_dung: nd,
       ngay: new Date().toLocaleDateString('vi-VN'),
       da_xac_nhan: false,
@@ -342,6 +344,7 @@ function initStarPicker() {
 
     // Reset form
     form.reset();
+    if (hiddenInput) hiddenInput.value = '0';
     selectedStar = 0;
     stars.forEach(s => s.classList.remove('active'));
     if (starLabel) starLabel.textContent = 'Chọn số sao';
@@ -448,73 +451,9 @@ function showToast(msg) {
 }
 
 // =====================
-// INIT HEADER (từ main.js)
-// =====================
-function initProductHeader() {
-  const hamburger = document.getElementById('hamburger');
-  const nav       = document.getElementById('nav');
-  const header    = document.getElementById('header');
-
-  hamburger?.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('open');
-    hamburger.classList.toggle('open', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
-
-  document.addEventListener('click', (e) => {
-    if (nav?.classList.contains('open') && !header?.contains(e.target)) {
-      nav.classList.remove('open');
-      hamburger?.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-  });
-
-  document.querySelectorAll('.has-dropdown').forEach(item => {
-    const link     = item.querySelector('.nav__link--arrow');
-    const dropdown = item.querySelector('.dropdown');
-    const isDesktop = () => window.innerWidth >= 768;
-
-    const show = () => { clearTimeout(item._timer); item.classList.add('open'); };
-    const tryHide = (rel) => {
-      if (item.contains(rel) || dropdown?.contains(rel)) return;
-      item._timer = setTimeout(() => item.classList.remove('open'), 100);
-    };
-
-    item.addEventListener('mouseenter', e => { if (isDesktop()) show(); });
-    item.addEventListener('mouseleave', e => { if (isDesktop()) tryHide(e.relatedTarget); });
-    dropdown?.addEventListener('mouseenter', e => { if (isDesktop()) show(); });
-    dropdown?.addEventListener('mouseleave', e => { if (isDesktop()) tryHide(e.relatedTarget); });
-
-    link?.addEventListener('click', e => {
-      if (isDesktop()) return;
-      e.preventDefault();
-      document.querySelectorAll('.has-dropdown.open').forEach(o => { if (o !== item) o.classList.remove('open'); });
-      item.classList.toggle('open');
-    });
-  });
-
-  // Shadow khi scroll
-  window.addEventListener('scroll', () => {
-    header?.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
-
-  // Back to top
-  const backTop = document.getElementById('backTop');
-  window.addEventListener('scroll', () => {
-    backTop?.classList.toggle('show', window.scrollY > 400);
-  }, { passive: true });
-  backTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-  // Year footer
-  const yr = document.getElementById('year');
-  if (yr) yr.textContent = new Date().getFullYear();
-}
-
-// =====================
 // INIT
 // =====================
 document.addEventListener('DOMContentLoaded', () => {
-  initProductHeader();
   initGallery();
   initContactModal();
   initCopyCode();
@@ -522,8 +461,4 @@ document.addEventListener('DOMContentLoaded', () => {
   initStarPicker();
   renderReviews('all');
   initReviewFilter();
-
-  // Year footer
-  const yr = document.getElementById('year');
-  if (yr) yr.textContent = new Date().getFullYear();
 });

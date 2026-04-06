@@ -119,22 +119,30 @@ $navActive = $navActive ?? '';
             <div class="dropdown__inner">
               <div class="dropdown__header"><p>Giải pháp theo ngành</p></div>
               <a href="#" class="dropdown__item">
-                <span class="dropdown__icon">🏢</span>
+                <span class="dropdown__icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
+                </span>
                 <span class="dropdown__content"><strong>Enterprise Network</strong><small>Hạ tầng mạng doanh nghiệp lớn</small></span>
                 <svg class="dropdown__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
               <a href="#" class="dropdown__item">
-                <span class="dropdown__icon">🏫</span>
+                <span class="dropdown__icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </span>
                 <span class="dropdown__content"><strong>Campus Network</strong><small>Mạng trường học, tòa nhà văn phòng</small></span>
                 <svg class="dropdown__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
               <a href="#" class="dropdown__item">
-                <span class="dropdown__icon">🔒</span>
+                <span class="dropdown__icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </span>
                 <span class="dropdown__content"><strong>Network Security</strong><small>Bảo mật hạ tầng & tường lửa NGFW</small></span>
                 <svg class="dropdown__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
               <a href="#" class="dropdown__item">
-                <span class="dropdown__icon">☁️</span>
+                <span class="dropdown__icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 109 20h9A5 5 0 0018 10z"/></svg>
+                </span>
                 <span class="dropdown__content"><strong>SD-WAN & Cloud</strong><small>Kết nối chi nhánh, hybrid cloud</small></span>
                 <svg class="dropdown__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>

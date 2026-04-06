@@ -117,6 +117,14 @@ model san_pham {
   noi_bat           Boolean?             @default(false)
   thu_tu            Int?                 @default(0)
   hien_thi          Boolean?             @default(true)
+  
+  // --- Các cột lọc chuẩn hóa ---
+  so_cong_downlink  Int?                 @default(0) // 5, 8, 16, 24, 48
+  so_cong_uplink    Int?                 @default(0) // 2, 4
+  toc_do_downlink   String?              @db.VarChar(50) // 1G, 10G, Multi-Gig
+  poe_budget        Int?                 @default(0) // Tổng Watt (0 nếu không có PoE)
+  lap_dat           String?              @db.VarChar(50) // Desktop, Rack-mount
+  
   tao_luc           DateTime             @default(now()) @db.Timestamp(0)
   cap_nhat          DateTime             @default(now()) @db.Timestamp(0)
   anh_san_pham      anh_san_pham[]
@@ -130,6 +138,7 @@ model san_pham {
   @@index([hien_thi], map: "idx_sp_hien_thi")
   @@index([ma_san_pham], map: "idx_sp_ma")
   @@index([series_id], map: "idx_sp_series")
+  @@index([so_cong_downlink], map: "idx_sp_so_cong")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -163,6 +172,7 @@ model san_pham_tags {
 model series {
   id             Int         @id @default(autoincrement())
   ho_san_pham_id Int
+  scenario_id    Int?
   ten            String      @db.VarChar(200)
   slug           String      @unique(map: "slug") @db.VarChar(200)
   mo_ta          String?     @db.Text
@@ -176,9 +186,21 @@ model series {
   cap_nhat       DateTime    @default(now()) @db.Timestamp(0)
   san_pham       san_pham[]
   ho_san_pham    ho_san_pham @relation(fields: [ho_san_pham_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "series_ibfk_1")
+  scenario       scenario?   @relation(fields: [scenario_id], references: [id], onDelete: SetNull, onUpdate: Restrict, map: "series_scenario_fk")
   tai_lieu       tai_lieu[]
 
   @@index([ho_san_pham_id], map: "idx_series_ho")
+  @@index([scenario_id], map: "idx_series_scenario")
+}
+
+model scenario {
+  id       Int      @id @default(autoincrement())
+  ten      String   @db.VarChar(100)
+  slug     String   @unique(map: "slug") @db.VarChar(100)
+  mo_ta    String?  @db.Text
+  thu_tu   Int?     @default(0)
+  hien_thi Boolean? @default(true)
+  series   series[]
 }
 
 model tags {

@@ -50,6 +50,9 @@ if ($pdo) {
         $stmt->execute([$dmId]);
         $seriesList = $stmt->fetchAll();
 
+        // Lấy danh sách scenario (Kịch bản sử dụng)
+        $scenarioList = $pdo->query("SELECT * FROM scenario WHERE hien_thi = 1 ORDER BY thu_tu")->fetchAll();
+
         // Build WHERE
         $where  = ['sp.hien_thi = 1', 'dm.id = :dm_id'];
         $params = [':dm_id' => $dmId];
@@ -64,27 +67,45 @@ if ($pdo) {
             $where[] = "s.slug IN (" . implode(',', $sPlaceholders) . ")";
         }
 
-        // --- Lọc theo thông số kỹ thuật (Switch) ---
-        $specFilters = [
-            'Scenario'           => $scenarioFilter,
-            'Downlink interface' => $interfaceFilter,
-            'Downlink speed'     => $dlspeedFilter,
-            'PoE'                => $poeFilter
-        ];
-
-        foreach ($specFilters as $specName => $values) {
-            if (!empty($values)) {
-                $placeholders = [];
-                foreach ($values as $i => $v) {
-                    $pName = ":" . str_replace(' ', '_', $specName) . "_" . $i;
-                    $placeholders[] = $pName;
-                    $params[$pName] = $v;
-                }
-                $where[] = "sp.id IN (
-                    SELECT san_pham_id FROM thong_so_ky_thuat 
-                    WHERE ten = '$specName' AND gia_tri IN (" . implode(',', $placeholders) . ")
-                )";
+        if (!empty($scenarioFilter)) {
+            $scPlaceholders = [];
+            foreach ($scenarioFilter as $i => $scSlug) {
+                $pName = ":sc_" . $i;
+                $scPlaceholders[] = $pName;
+                $params[$pName] = $scSlug;
             }
+            $where[] = "s.scenario_id IN (SELECT id FROM scenario WHERE slug IN (" . implode(',', $scPlaceholders) . "))";
+        }
+
+        // --- Lọc theo thông số chuẩn hóa (Tối ưu hiệu năng) ---
+        
+        // 1. Lọc theo số cổng Downlink (Dải giá trị)
+        if (!empty($interfaceFilter)) {
+            $intConditions = [];
+            foreach ($interfaceFilter as $val) {
+                if ($val === '<24') $intConditions[] = "sp.so_cong_downlink < 24";
+                elseif ($val === '24-48') $intConditions[] = "sp.so_cong_downlink BETWEEN 24 AND 48";
+                elseif ($val === '>48') $intConditions[] = "sp.so_cong_downlink > 48";
+            }
+            if (!empty($intConditions)) {
+                $where[] = "(" . implode(" OR ", $intConditions) . ")";
+            }
+        }
+
+        // 2. Lọc theo tốc độ Downlink
+        if (!empty($dlspeedFilter)) {
+            $dlOrs = [];
+            foreach ($dlspeedFilter as $i => $v) {
+                $pName = ":dls_" . $i;
+                $params[$pName] = (str_contains($v, '1Gb')) ? '%1G%' : '%' . $v . '%'; 
+                $dlOrs[] = "sp.toc_do_downlink LIKE $pName";
+            }
+            $where[] = "(" . implode(" OR ", $dlOrs) . ")";
+        }
+
+        // 3. Lọc theo PoE (Nếu có chọn lọc PoE thì tìm các sản phẩm có poe_budget > 0)
+        if (!empty($poeFilter)) {
+            $where[] = "sp.poe_budget > 0";
         }
 
         $whereStr = 'WHERE ' . implode(' AND ', $where);
@@ -130,7 +151,7 @@ if ($pdo) {
         $sanPhamList = $stmtSP->fetchAll();
     }
 } else {
-    $danhMucHienTai = ['id' => 1, 'ten' => 'Switch', 'slug' => 'switch', 'icon' => '🔀', 'mo_ta' => 'Thiết bị chuyển mạch Cisco'];
+    $danhMucHienTai = ['id' => 1, 'ten' => 'Switch', 'slug' => 'switch', 'icon' => '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>', 'mo_ta' => 'Thiết bị chuyển mạch Cisco'];
     $seriesList = [];
     $sanPhamList = [];
 }
@@ -168,7 +189,7 @@ require_once 'includes/breadcrumb.php';
 <div class="page-hero">
   <div class="container">
     <div class="page-hero__inner">
-      <div class="page-hero__icon"><?= $danhMucHienTai['icon'] ?? '📦' ?></div>
+      <div class="page-hero__icon"><?= $danhMucHienTai['icon'] ?? '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>' ?></div>
       <div>
         <h1 class="page-hero__title">Cisco <?= lamsach($danhMucHienTai['ten'] ?? 'Sản phẩm') ?></h1>
         <p class="page-hero__desc"><?= lamsach($danhMucHienTai['mo_ta'] ?? '') ?> — Hàng chính hãng Cisco tại Việt Nam</p>
@@ -206,26 +227,15 @@ require_once 'includes/breadcrumb.php';
         <form id="filterForm" method="GET" action="" class="horizontal-filters collapsible-content">
           <input type="hidden" name="danh_muc" value="<?= lamsach($danhMucSlug) ?>" />
           <div class="h-filter-row">
-            <?php if (!empty($seriesList)): ?>
-            <div class="filter-group">
-              <label class="filter-group__label">Dòng sản phẩm:</label>
-              <div class="filter-pills">
-                <?php foreach ($seriesList as $s): ?>
-                <label class="filter-pill">
-                  <input type="checkbox" name="series[]" value="<?= $s['slug'] ?>" <?= in_array($s['slug'], $seriesFilter) ? 'checked' : '' ?>>
-                  <span><?= lamsach($s['ten']) ?></span>
-                </label>
-                <?php endforeach; ?>
-              </div>
-            </div>
-            <?php endif; ?>
-
             <?php if ($danhMucSlug === 'switch'): ?>
               <div class="filter-group">
                 <label class="filter-group__label">Scenario:</label>
                 <div class="filter-pills">
-                  <?php foreach (['SMB', 'Enterprise', 'Data Center', 'Industrial'] as $opt): ?>
-                  <label class="filter-pill"><input type="checkbox" name="scenario[]" value="<?= $opt ?>" <?= in_array($opt, $scenarioFilter) ? 'checked' : '' ?>><span><?= $opt ?></span></label>
+                  <?php foreach ($scenarioList as $sc): ?>
+                  <label class="filter-pill">
+                    <input type="checkbox" name="scenario[]" value="<?= $sc['slug'] ?>" <?= in_array($sc['slug'], $scenarioFilter) ? 'checked' : '' ?>>
+                    <span><?= lamsach($sc['ten']) ?></span>
+                  </label>
                   <?php endforeach; ?>
                 </div>
               </div>
@@ -254,10 +264,6 @@ require_once 'includes/breadcrumb.php';
                 </div>
               </div>
             <?php endif; ?>
-
-            <?php if (!empty($seriesFilter) || !empty($scenarioFilter) || !empty($interfaceFilter) || !empty($dlspeedFilter) || !empty($poeFilter)): ?>
-            <a href="?danh_muc=<?= lamsach($danhMucSlug) ?>" class="btn-clear-all">Xóa lọc</a>
-            <?php endif; ?>
           </div>
         </form>
       </section>
@@ -285,8 +291,13 @@ require_once 'includes/breadcrumb.php';
         <?php if (!empty($seriesFilter)): foreach ($seriesFilter as $sSlug): 
             $sHT = array_values(array_filter($seriesList, fn($s) => $s['slug'] === $sSlug));
             if ($sHT): ?><span class="active-filter-tag">Series: <?= lamsach($sHT[0]['ten']) ?><a href="<?= buildUrl(['series' => array_diff($seriesFilter, [$sSlug])]) ?>">×</a></span><?php endif; endforeach; endif; ?>
+        
+        <?php if (!empty($scenarioFilter)): foreach ($scenarioFilter as $scSlug): 
+            $scHT = array_values(array_filter($scenarioList, fn($sc) => $sc['slug'] === $scSlug));
+            if ($scHT): ?><span class="active-filter-tag">Scenario: <?= lamsach($scHT[0]['ten']) ?><a href="<?= buildUrl(['scenario' => array_diff($scenarioFilter, [$scSlug])]) ?>">×</a></span><?php endif; endforeach; endif; ?>
+
         <?php
-        $allSpecTags = ['scenario' => $scenarioFilter, 'interface' => $interfaceFilter, 'dlspeed' => $dlspeedFilter, 'poe' => $poeFilter];
+        $allSpecTags = ['interface' => $interfaceFilter, 'dlspeed' => $dlspeedFilter, 'poe' => $poeFilter];
         foreach ($allSpecTags as $key => $vals): foreach ($vals as $v): ?>
           <span class="active-filter-tag"><?= lamsach($v) ?><a href="<?= buildUrl([$key => array_diff($vals, [$v])]) ?>">×</a></span>
         <?php endforeach; endforeach; ?>

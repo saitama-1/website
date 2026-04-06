@@ -106,10 +106,10 @@ $loaiBaiViet = [
 ];
 
 $nhomSection = [
-    'switch'   => ['icon' => '🔀', 'label' => 'Cisco Switch',   'title' => 'Thiết bị chuyển mạch'],
-    'router'   => ['icon' => '🌐', 'label' => 'Cisco Router',   'title' => 'Thiết bị định tuyến'],
-    'firewall' => ['icon' => '🔒', 'label' => 'Cisco Firewall', 'title' => 'Thiết bị tường lửa'],
-    'wireless' => ['icon' => '📶', 'label' => 'Cisco Wireless', 'title' => 'Access Point Wi-Fi'],
+    'switch'   => ['icon' => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>', 'label' => 'Cisco Switch',   'title' => 'Thiết bị chuyển mạch'],
+    'router'   => ['icon' => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2v20"/><path d="M6 6l12 12"/><path d="M6 18L18 6"/></svg>', 'label' => 'Cisco Router',   'title' => 'Thiết bị định tuyến'],
+    'firewall' => ['icon' => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>', 'label' => 'Cisco Firewall', 'title' => 'Thiết bị tường lửa'],
+    'wireless' => ['icon' => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></svg>', 'label' => 'Cisco Wireless', 'title' => 'Access Point Wi-Fi'],
 ];
 // Cấu hình header
 $tieuDeTrang = 'CiscoVN — Nhà phân phối thiết bị mạng Cisco chính hãng';
@@ -157,22 +157,22 @@ require_once 'includes/header.php';
     </div>
     <div class="hero__cards">
       <div class="hcard hcard--1">
-        <span class="hcard__icon">🔀</span>
+        <svg class="hcard__icon-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         <div class="hcard__body"><strong>Catalyst 9300-48P</strong><small>48-Port PoE+ Switch · L3</small></div>
         <span class="hcard__tag">Liên hệ</span>
       </div>
       <div class="hcard hcard--2">
-        <span class="hcard__icon">🔒</span>
+        <svg class="hcard__icon-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         <div class="hcard__body"><strong>Firepower 2110</strong><small>Next-Gen Firewall · NGFW</small></div>
         <span class="hcard__tag">Liên hệ</span>
       </div>
       <div class="hcard hcard--3">
-        <span class="hcard__icon">🌐</span>
+        <svg class="hcard__icon-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2v20"/><path d="M6 6l12 12"/><path d="M6 18L18 6"/></svg>
         <div class="hcard__body"><strong>ISR 4331/K9</strong><small>Enterprise Router · SD-WAN</small></div>
         <span class="hcard__tag">Liên hệ</span>
       </div>
       <div class="hcard hcard--4">
-        <span class="hcard__icon">📶</span>
+        <svg class="hcard__icon-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></svg>
         <div class="hcard__body"><strong>C9120AXI-A</strong><small>Wi-Fi 6 AP · Indoor</small></div>
         <span class="hcard__tag">Liên hệ</span>
       </div>
@@ -188,19 +188,19 @@ require_once 'includes/header.php';
 <section class="why-us">
   <div class="container why-us__grid">
     <div class="why-us__item">
-      <div class="why-us__icon">✅</div>
+      <svg class="why-us__icon-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
       <div><strong>Hàng chính hãng 100%</strong><span>CO/CQ đầy đủ, bảo hành Cisco</span></div>
     </div>
     <div class="why-us__item">
-      <div class="why-us__icon">🚀</div>
+      <svg class="why-us__icon-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
       <div><strong>Giao hàng toàn quốc</strong><span>Nhanh chóng, đóng gói cẩn thận</span></div>
     </div>
     <div class="why-us__item">
-      <div class="why-us__icon">🛠️</div>
+      <svg class="why-us__icon-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
       <div><strong>Hỗ trợ kỹ thuật 24/7</strong><span>Kỹ sư CCNA/CCNP giàu kinh nghiệm</span></div>
     </div>
     <div class="why-us__item">
-      <div class="why-us__icon">💰</div>
+      <svg class="why-us__icon-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
       <div><strong>Báo giá cạnh tranh</strong><span>Chiết khấu hấp dẫn theo số lượng</span></div>
     </div>
   </div>
@@ -302,7 +302,7 @@ foreach ($nhomSection as $slug => $info):
   <div class="container">
     <div class="section__hd">
       <div class="section__hd-left">
-        <span class="section__icon"><?= $info['icon'] ?></span>
+        <span class="section__icon section__icon--svg"><?= $info['icon'] ?></span>
         <div>
           <p class="section__label"><?= $info['label'] ?></p>
           <h2 class="section__title"><?= $info['title'] ?></h2>
@@ -411,8 +411,10 @@ foreach ($nhomSection as $slug => $info):
         </a>
         <div class="blog-card__body">
           <div class="blog-card__meta">
-            <span>✍️ <?= lamsach($bv['tac_gia']) ?></span>
-            <span>📅 <?= date('d/m/Y', strtotime($bv['tao_luc'])) ?></span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span><?= lamsach($bv['tac_gia']) ?></span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span><?= date('d/m/Y', strtotime($bv['tao_luc'])) ?></span>
           </div>
           <h3 class="blog-card__title">
             <a href="blog/<?= lamsach($bv['slug']) ?>.php">

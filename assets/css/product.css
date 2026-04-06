@@ -194,7 +194,7 @@
   width: 18px; height: 18px;
   fill: #fbbf24;
 }
-.star--half { fill: url(#halfGrad); opacity: .7; }
+.star--half { fill: #fbbf24; clip-path: inset(0 50% 0 0); }
 
 .rating-score {
   font-size: 15px;

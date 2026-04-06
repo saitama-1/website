@@ -154,6 +154,7 @@ function jumpToPage(maxPage) {
 
   let page = parseInt(input.value);
   if (isNaN(page) || page < 1) page = 1;
+  if (page < 1) page = 1;
   if (page > maxPage) page = maxPage;
 
   const url   = new URL(window.location.href);

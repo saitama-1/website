@@ -66,7 +66,6 @@ input, button, select, textarea { font-family: inherit; font-size: inherit; }
 }
 
 .section__icon {
-  font-size: 28px;
   width: 58px;
   height: 58px;
   background: linear-gradient(135deg, rgba(0,80,115,.08) 0%, rgba(0,188,235,.12) 100%);
@@ -76,7 +75,29 @@ input, button, select, textarea { font-family: inherit; font-size: inherit; }
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  color: var(--blue);
 }
+.section__icon svg { width: 28px; height: 28px; }
+
+/* Hcard SVG icons */
+.hcard__icon-svg {
+  width: 24px; height: 24px;
+  color: var(--cyan);
+  flex-shrink: 0;
+}
+
+/* Why-us SVG icons */
+.why-us__icon-svg {
+  width: 22px; height: 22px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+/* Blog meta SVG icons */
+.blog-card__meta svg { flex-shrink: 0; }
+
+/* Footer contact SVG icons */
+.footer__contacts a svg { flex-shrink: 0; }
 
 .section__label {
   font-size: 11px;

@@ -43,14 +43,14 @@ require_once 'includes/breadcrumb.php';
               src="https://cnttshop.vn//storage/images/San-pham/Switch/Cisco/110/CBS110-16T/CBS110-16T-4.jpg"
               alt="Cisco Catalyst C9200-24T-A — Mặt trước"
               id="mainImg" draggable="false"
-              onerror="this.src='https.placehold.co/600x480/e8f4ff/005073?text=Cisco+C9200-24T-A'" />
+              onerror="this.src='https://placehold.co/600x480/e8f4ff/005073?text=Cisco+C9200-24T-A'" />
             <div class="zoom-lens" id="zoomLens"></div>
           </div>
           <div class="zoom-preview" id="zoomPreview">
             <img
               src="https://cnttshop.vn//storage/images/San-pham/Switch/Cisco/110/CBS110-16T/CBS110-16T-4.jpg"
               id="zoomPreviewImg" alt="Zoom preview"
-              onerror="this.src='https.placehold.co/600x480/e8f4ff/005073?text=Zoom'" />
+              onerror="this.src='https://placehold.co/600x480/e8f4ff/005073?text=Zoom'" />
           </div>
         </div>
 
@@ -137,7 +137,7 @@ require_once 'includes/breadcrumb.php';
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
             Liên hệ báo giá
           </button>
-          <a href="tel:0901234567" class="btn btn--outline btn--lg">
+          <a href="tel:<?php echo CONG_TY_DIEN_THOAI; ?>" class="btn btn--outline btn--lg">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
             Gọi ngay
           </a>
@@ -213,22 +213,30 @@ require_once 'includes/breadcrumb.php';
 
         <div class="feature-cards">
           <div class="feature-card">
-            <div class="feature-card__icon">⚡</div>
+            <div class="feature-card__icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
             <h4>Hiệu năng cao</h4>
             <p>Switching capacity 128 Gbps, forwarding rate 95.23 Mpps đảm bảo không bottleneck cho mạng campus</p>
           </div>
           <div class="feature-card">
-            <div class="feature-card__icon">🔗</div>
+            <div class="feature-card__icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 2 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            </div>
             <h4>StackWise 160</h4>
             <p>Stack tối đa 8 thiết bị với băng thông stack 160 Gbps, quản lý như một switch duy nhất</p>
           </div>
           <div class="feature-card">
-            <div class="feature-card__icon">🔒</div>
+            <div class="feature-card__icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
             <h4>Bảo mật tích hợp</h4>
             <p>Cisco TrustSec, MACsec 128-bit, 802.1X authentication và Encrypted Traffic Analytics</p>
           </div>
           <div class="feature-card">
-            <div class="feature-card__icon">🧠</div>
+            <div class="feature-card__icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
             <h4>Cisco DNA Ready</h4>
             <p>Tích hợp hoàn toàn với Cisco DNA Center, hỗ trợ SD-Access và tự động hóa mạng</p>
           </div>
@@ -299,8 +307,8 @@ require_once 'includes/breadcrumb.php';
                   data-ten="Cisco Catalyst C9200-24T-A">
             Chat Zalo ngay
           </button>
-          <a href="tel:0901234567" class="btn btn--outline-white btn--sm" style="margin-top:8px">
-            Gọi 0901 234 567
+          <a href="tel:<?php echo CONG_TY_DIEN_THOAI; ?>" class="btn btn--outline-white btn--sm" style="margin-top:8px">
+            G&#7885;i <?php echo CONG_TY_DIEN_THOAI; ?>
           </a>
         </div>
       </aside>
@@ -426,6 +434,7 @@ require_once 'includes/breadcrumb.php';
         <div class="review-form-wrap">
           <h3>Viết đánh giá của bạn</h3>
           <form class="review-form" id="reviewForm">
+            <input type="hidden" name="sao" id="reviewStarInput" value="0" />
             <div class="review-form__stars">
               <span>Đánh giá:</span>
               <div class="star-picker" id="starPicker">
@@ -439,10 +448,10 @@ require_once 'includes/breadcrumb.php';
             </div>
             <div class="review-form__fields">
               <div class="form-row">
-                <input type="text" placeholder="Họ tên *" required />
-                <input type="text" placeholder="Công ty / Tổ chức" />
+                <input type="text" name="ho_ten" placeholder="Họ tên *" required />
+                <input type="text" name="cong_ty" placeholder="Công ty / Tổ chức" />
               </div>
-              <textarea placeholder="Nhận xét của bạn về sản phẩm *" rows="4" required></textarea>
+              <textarea name="nhan_xet" placeholder="Nhận xét của bạn về sản phẩm *" rows="4" required></textarea>
             </div>
             <button type="submit" class="btn btn--primary">
               Gửi đánh giá

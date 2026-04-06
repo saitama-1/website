@@ -3,5 +3,6 @@ node_modules
 .env
 # Google Gemini
 .gemini/
+.claude/
 
 /generated/prisma
