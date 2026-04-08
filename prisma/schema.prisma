@@ -123,8 +123,8 @@ model san_pham {
   so_cong_uplink    Int?                 @default(0) // 2, 4
   toc_do_downlink   String?              @db.VarChar(50) // 1G, 10G, Multi-Gig
   poe_budget        Int?                 @default(0) // Tổng Watt (0 nếu không có PoE)
-  lap_dat           String?              @db.VarChar(50) // Desktop, Rack-mount
-  
+  loai_poe          String?              @db.VarChar(100) // PoE, PoE+, UPoE, UPoE+
+
   tao_luc           DateTime             @default(now()) @db.Timestamp(0)
   cap_nhat          DateTime             @default(now()) @db.Timestamp(0)
   anh_san_pham      anh_san_pham[]
